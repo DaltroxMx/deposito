@@ -10,18 +10,45 @@ class DepositoController extends CI_Controller {
 
 	public function index()
 	{
+		$this->load->view('header');
+		$this->load->view('principal');
+		$this->load->view('footer');
+	}
+	public function administrador(){
+		$this->load->view('headeradmon');
 		$this->load->view('inicio');
+		$this->load->view('footer');
+	}
+	public function productos(){
+		$this->load->view('header');
+		$this->load->view('productos');
+		$this->load->view('footer');
+	}
+	public function listacompra(){
+		$this->load->view('header');
+		$this->load->view('lista');
+		$this->load->view('footer');
 	}
 
 	function guardar(){
 		if($_POST) {
 			$this->depositoModel->guardar($_POST);
 		}
+		$this->load->view('headeradmon');
 		$this->load->view('inicio');
+		$this->load->view('footer');
 	}
 
-	function borrar(){
-		$this->depositoModel->borrar($_GET);
-		$this->load->view('inicio');
+	function guardar2($id){
+		$this->depositoModel->guardar2($id);
+		$this->load->view('header');
+		$this->load->view('productos');
+		$this->load->view('footer');
 	}
+
+	public function borrar($id){
+		$this->depositoModel->borrar($id);
+		redirect(base_url("depositoController/administrador"));
+	}
+
 }
