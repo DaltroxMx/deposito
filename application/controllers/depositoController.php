@@ -39,8 +39,10 @@ class DepositoController extends CI_Controller {
 		$this->load->view('footer');
 	}
 
-	function guardar2($id){
-		$this->depositoModel->guardar2($id);
+	function guardar2(){
+		if($_POST){
+			$this->depositoModel->guardar2($_POST);
+		}
 		$this->load->view('header');
 		$this->load->view('productos');
 		$this->load->view('footer');

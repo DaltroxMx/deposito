@@ -40,20 +40,26 @@ class DepositoModel extends CI_Model {
 
 	}
 
-	function guardar2($id){
+	function guardar2($post){
 		$datosCarrito = array();
 		$datosCarrito['id'] = $post['id'];
 		$datosCarrito['Nombre'] = $post['Nombre'];
 		$datosCarrito['Contenido'] = $post['Contenido'];
 		$datosCarrito['Cantidad'] = $post['Cantidad'];
+		$datosCarrito['Precio'] = $post['Precio'];
 		
-		//$datosProducto['imagen'] = addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
-		
-	
-		
+		if($datosCarrito['id'] > 0){
+			$this->db->where('id', $datosCarrito['id']);
+			$this->db->update('carrito', $datosCarrito);
+			$ruta = base_url('depositoController/productos');
+		}else{
 			$this->db->insert('carrito', $datosCarrito);
 			$ruta = base_url('depositoController/productos');
-		
+			echo "<script>
+				alert('Producto agregado al carrito satisfactoriamente.');
+				window.location = '{$ruta}';
+				</script>";
+		}
 		
 
 	}
